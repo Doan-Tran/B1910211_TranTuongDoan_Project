@@ -98,17 +98,17 @@ exports.delete = async (req, res, next) => {
     }
 };
 
-// Find all favorite notes of a user
-exports.findAllFavorite = async (_req, res, next) => {
+// Find all important notes of a user
+exports.findAllImportant = async (_req, res, next) => {
     try {
         const noteService = new NoteService(MongoDB.client);
-        const documents = await noteService.findFavorite();
+        const documents = await noteService.findImportant();
         return res.send(documents);
     }   catch (error) {
         return next(
             new ApiError(
                 500,
-                "Đã xảy ra lỗi khi truy xuất ghi chú yêu thích"
+                "Đã xảy ra lỗi khi truy xuất ghi chú quan trọng"
             )
         );
     }

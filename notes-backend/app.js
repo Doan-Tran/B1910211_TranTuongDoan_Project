@@ -1,5 +1,6 @@
 const express = require("express");
 const notesRouter = require("./app/routes/note.route");
+const contactsRouter = require("./app/routes/contact.route");
 const cors = require("cors");
 const ApiError = require("./app/api-error");
 const bodyParser = require('body-parser');
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use("/api/notes", notesRouter);
+app.use("/api/contacts",contactsRouter);
 
 // handle 404 response
 app.use((req, res, next) => {
@@ -35,5 +37,6 @@ app.get("/", (req, res) => {
     res.json({ message: "Welcome to take note application."});
 });
 app.use("/api/notes", notesRouter);
+app.use("/api/contacts",contactsRouter);
 
 module.exports = app;

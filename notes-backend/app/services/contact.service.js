@@ -1,36 +1,37 @@
 const { ObjectId } = require("mongodb");
 
-class NoteService {
+class ContactService {
     constructor(client) {
-        this.Note = client.db().collection("notes");
+        this.Contact = client.db().collection("contacts");
     }
     // Định nghĩa các phương thức truy xuất CSDL sử dụng mongodb API
-    extractNoteData(payload) {
-        const note = {
+    extractContactData(payload) {
+        const contact = {
             name: payload.name,
-            title: payload.title,
-            description: payload.description,
-            important: payload.important,
+            email: payload.email,
+            address: payload.address,
+            phone: payload.phone,
+            favorite: payload.favorite
         };
         // Remove undefined fields
-        Object.keys(note).forEach(
-            (key) => note[key] === undefined && delete note[key]
+        Object.keys(contact).forEach(
+            (key) => contact[key] === undefined && delete contact[key]
         );
-        return note;
+        return contact;
     }
     
     async create(payload) {
-        const note = this.extractNoteData(payload);
-        const result = await this.Note.findOneAndUpdate(
-            note,
-            { $set: { important: note.important === true } },
+        const contact = this.extractContactData(payload);
+        const result = await this.Contact.findOneAndUpdate(
+            contact,
+            { $set: { favorite: contact.favorite === true } },
             { returnDocument: "after", upsert: true }
         );
         return result.value;
     }
 
     async find(filter) {
-        const cursor = await this.Note.find(filter);
+        const cursor = await this.Contact.find(filter);
         return await cursor.toArray();
         }
 
@@ -41,7 +42,7 @@ class NoteService {
     }
     
     async findById(id) {
-        return await this.Note.findOne({
+        return await this.Contact.findOne({
             _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
         });
     }
@@ -50,8 +51,8 @@ class NoteService {
         const filter = {
             _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
         };
-        const update = this.extractNoteData(payload);
-        const result = await this.Note.findOneAndUpdate(
+        const update = this.extractConatctData(payload);
+        const result = await this.Conatct.findOneAndUpdate(
             filter,
             { $set: update },
             { returnDocument: "after"}
@@ -60,20 +61,20 @@ class NoteService {
     }
 
     async delete(id) {
-        const result = await this.Note.findOneAndDelete({
+        const result = await this.Contact.findOneAndDelete({
             _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
         });
         return result.value;
     }
 
-    async findImportant() {
-        return await this.find({ important: true });
+    async findFavorite() {
+        return await this.find({ favorite: true });
     }
 
     async deleteAll() {
-        const result = await this.Note.deleteMany({});
+        const result = await this.Contact.deleteMany({});
         return result.deletedCount;
     }
 }
 
-module.exports = NoteService;
+module.exports = ContactService;

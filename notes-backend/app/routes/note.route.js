@@ -8,8 +8,8 @@ router.route("/")
     .post(notes.create)
     .delete(notes.deleteAll);
 
-router.route("/favorite")
-    .get(notes.findAllFavorite);
+router.route("/important")
+    .get(notes.findAllImportant);
 
 router.route("/:id")
     .get(notes.findOne)
