@@ -1,6 +1,6 @@
 <template>
     <div v-if="note" class="page">
-        <h4>Thêm Ghi Chú</h4>
+        <h4>Thêm ghi chú</h4>
         <NoteForm 
             :note="note" 
             @submit:note="createNote" 

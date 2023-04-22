@@ -27,7 +27,7 @@ export default {
         />
         <div class="input-group-append">
             <button
-                class="btn btn-outline-secondary"
+                class="btn btn-info"
                 type="button"
                 @click="submit"
             >

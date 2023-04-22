@@ -1,36 +1,36 @@
 <template>
-    <div v-if="note" class="page">
-        <h4>Cập nhật ghi chú</h4>
-        <NoteForm
-            :note="note"
-            @submit:note="updateNote"
-            @delete:note="deleteNote"
+    <div v-if="contact" class="page">
+        <h4>Cập nhật liên hệ</h4>
+        <ContactForm
+            :contact="contact"
+            @submit:contact="updateContact"
+            @delete:contact="deleteContact"
         />
         <p>{{ message }}</p>
     </div>
 </template>
 
 <script>
-import NoteForm from "@/components/NoteForm.vue";
-import NoteService from "@/services/note.service";
+import ContactForm from "@/components/ContactForm.vue";
+import ContactService from "@/services/contact.service";
 
 export default {
     components: {
-        NoteForm,
+        ContactForm,
     },
     props: {
         id: { type: String, required: true },
     },
     data() {
         return {
-            note: null,
+            contact: null,
             message: "",
         };
     },
     methods: {
-        async getNote(id) {
+        async getContact(id) {
             try {
-                this.note = await NoteService.get(id);
+                this.contact = await ContactService.get(id);
             } catch (error) {
                 console.log(error);
                 // Chuyển sang trang NotFound đồng thời giữ cho URL không đổi
@@ -45,20 +45,20 @@ export default {
             }
         },
 
-        async updateNote(data) {
+        async updateContact(data) {
             try {
-                await NoteService.update(this.note._id, data);
-                this.message = "Ghi chú được cập nhật thành công.";
+                await ContactService.update(this.contact._id, data);
+                this.message = "Liên hệ được cập nhật thành công.";
             } catch (error) {
                 console.log(error);
             }
         },
 
-        async deleteNote() {
-            if (confirm("Bạn muốn xóa ghi chú này?")) {
+        async deleteContact() {
+            if (confirm("Bạn muốn xóa liên hệ này?")) {
                 try {
-                    await NoteService.delete(this.note._id);
-                    this.$router.push({ name: "notebook" });
+                    await ContactService.delete(this.contact._id);
+                    this.$router.push({ name: "contactbook" });
                 } catch (error) {
                     console.log(error);
                 }
@@ -66,7 +66,7 @@ export default {
         },
     },
     created() {
-        this.getNote(this.id);
+        this.getContact(this.id);
         this.message = "";
     },
 };

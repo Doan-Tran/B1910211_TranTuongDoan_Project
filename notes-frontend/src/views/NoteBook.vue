@@ -6,7 +6,6 @@
         <div class="mt-3 col-md-6">
             <h4>
                 Ghi chú
-                <i class="fas fa-address-book"></i>
             </h4>
             <NoteList
                 v-if="filteredNotesCount > 0"
@@ -34,8 +33,7 @@
         <div class="mt-3 col-md-6">
             <div v-if="activeNote">
                 <h4>
-                    Chi tiết Ghi chú
-                    <i class="fas fa-address-card"></i>
+                    Chi tiết ghi chú
                 </h4>
                 <NoteCard :note="activeNote" />
                 <router-link

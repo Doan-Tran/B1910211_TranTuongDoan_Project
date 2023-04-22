@@ -33,13 +33,13 @@
 
         <div class="form-group form-check">
             <input
-                name="favorite"
+                name="important"
                 type="checkbox"
                 class="form-check-input"
-                v-model="noteLocal.favorite"
+                v-model="noteLocal.important"
             />
-            <label for="favorite" class="form-check-label">
-                <strong>Ghi chú yêu thích</strong>
+            <label for="important" class="form-check-label">
+                <strong>Ghi chú quan trọng</strong>
             </label>
         </div>
 

@@ -21,8 +21,8 @@
             {{ note.description }}
         </div>
         <div class="p-1">
-            <strong>Ghi chú yêu thích:&nbsp;</strong>
-            <i v-if="note.favorite" class="fas fa-check"></i>
+            <strong>Ghi chú quan trọng:&nbsp;</strong>
+            <i v-if="note.important" class="fas fa-check"></i>
             <i v-else class="fas fa-times"></i>
         </div>
     </div>
