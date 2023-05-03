@@ -2,6 +2,7 @@ const express = require("express");
 const notesRouter = require("./app/routes/note.route");
 const contactsRouter = require("./app/routes/contact.route");
 const cors = require("cors");
+//Là một cơ chế cho phép hạn chế việc chia sẻ tài nguyên của một trang web đối với các trang web khác.
 const ApiError = require("./app/api-error");
 const bodyParser = require('body-parser');
 //Là phần mềm trung gian node.js để xử lý dữ liệu biểu mẫu được mã hóa JSON, Raw, Text và URL.
